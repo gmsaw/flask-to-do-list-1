@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024 To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main">
+        <div class="header-box">
+            <h1 class="title">{{year}}</h1>
+            <h2 class="sub-title">To-Do List</h2>
+        </div>
+        <div class="layout">
+            <label for="layout">Layout: </label>
+            <select id="layout" class="selector">
+                <option value="calendar">Calendar</option>
+                <option value="column">Column</option>
+            </select>
+        </div>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Current week: Minggu ke-{{ weeks }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for week_number in range(1, weeks_in_year + 1) %}
+                        <tr>
+                            <td class="week-{{week_number}}"><a href="{{url_for('to_do', week=week_number)}}"  class="overlay-link"></a><p class="info-column">Minggu {{ week_number }}, 
+                                {% if week_number == weeks %}
+                                    hari ke- {{ days }}, {{ percent }}% terlewati
+                                {% endif %}</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div></div>
+    </div>
+</body>
+</html>
